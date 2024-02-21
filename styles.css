@@ -1,0 +1,19 @@
+/* here we are selecting the tags on the html document upto the viewDiv id */
+html, body, #viewDiv {
+    width: 100vw;
+    height: 100vh;
+}
+@media (max-width: 768px) {
+    /* Styles for small screens */
+    /* using the .esri-sketch default class of sketch widget */
+    .esri-sketch {
+        position: absolute;
+        top: 10px; 
+        right: 10px; 
+        z-index: 9999; /* to position it  above other elements */
+    }
+    #viewDiv {
+       /* max-width: 300px; */
+       /* height: auto; */
+    }
+}
