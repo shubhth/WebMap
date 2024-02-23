@@ -6,8 +6,9 @@ require([
     "esri/Map",
     "esri/views/MapView",
     "esri/widgets/Sketch",
-    "esri/widgets/Home"
-  ], (esriConfig, Map, MapView, Sketch, Home) => {
+    "esri/widgets/Home",
+     "esri/layers/GraphicsLayer"
+  ], (esriConfig, Map, MapView, Sketch, Home,  GraphicsLayer) => {
     // Set the API key obtained from https://developers.arcgis.com/api-keys/ on the user dashboard, without the api key most basemap services would require sign in
     esriConfig.apiKey = "AAPKfe75a1a0fdf64f4eb98ecedea8361482hVRNN1YTOm4xBGR2FveYly67Eyu7dhvwd_Kl4dOg0QdIUnXDzEA2tk0bJdQS00z6";
   
@@ -23,14 +24,21 @@ require([
       zoom: 13, // Zoom level
       container: "viewDiv" // Div element to contain the map view in index.html
     });
+
+    // Create a GraphicsLayer to draw sketches
+      const graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
   
     // Create a Sketch widget and add it to the view on the top-right section of the webmap
     // The Sketch widget allows users to create and edit graphics on the map, such as points, lines, and polygons
     // It provides tools for drawing, editing, and deleting graphics
-    const sketchWidget = new Sketch({
-      view: view
+   
+    const sketch = new Sketch({
+      view: view,
+      layer: graphicsLayer
     });
-    view.ui.add(sketchWidget, "top-right");
+    view.ui.add(sketch, "top-right"); 
+  
   
     // Create a Home widget and add it to the view top-left section of the webmap
     //the home widget when clicked, it makes the map go to it's original display  extent or auto upgrade if cannot fit in current display
